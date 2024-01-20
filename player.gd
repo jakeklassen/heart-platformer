@@ -8,7 +8,7 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	handle_jump()
 
