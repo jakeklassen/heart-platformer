@@ -8,7 +8,7 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var coyote_jump_timer: Timer = $CoyoteJumpTimer
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	apply_gravity(delta)
 	handle_jump()
 
@@ -18,13 +18,13 @@ func _physics_process(delta: float) -> void:
 	apply_air_resistance(direction, delta)
 	update_animations(direction)
 
-	# Are we on the floor before moving?
+	# Track if we're on the floor BEFORE we move
 	var was_on_floor = is_on_floor()
 
 	move_and_slide()
 
-# We were on the floor, after moving we are not, but we're also "falling"
-	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y > 0
+	# We were on the floor, after moving we are not, but we're also "falling"
+	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_ledge:
 		coyote_jump_timer.start()
 
