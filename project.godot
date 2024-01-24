@@ -32,6 +32,12 @@ window/stretch/mode="canvas_items"
 
 movie_writer/movie_file="D:/Videos/godot-exports/heart-platformer.avi"
 
+[gui]
+
+theme/custom="res://default_theme.tres"
+theme/custom_font="res://pixel_font.ttf"
+theme/default_font_subpixel_positioning=0
+
 [input]
 
 ui_accept={
