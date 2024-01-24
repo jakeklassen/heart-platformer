@@ -2,9 +2,20 @@ extends Node2D
 
 @export var next_level: PackedScene
 @onready var level_completed: ColorRect = $CanvasLayer/LevelCompleted
+@onready var start_in: ColorRect = %StartIn
+@onready var start_in_label: Label = %StartInLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	Events.level_completed.connect(show_level_completed)
+
+	get_tree().paused = true
+	start_in.visible = true
+	await LevelTransition.fade_from_black()
+	animation_player.play("countdown")
+	await animation_player.animation_finished
+	get_tree().paused = false
+	start_in.visible = false
 
 func show_level_completed():
 	level_completed.show()
@@ -18,4 +29,3 @@ func show_level_completed():
 	get_tree().paused = false
 
 	get_tree().change_scene_to_packed(next_level)
-	LevelTransition.fade_from_black()

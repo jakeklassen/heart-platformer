@@ -21,7 +21,6 @@ func _physics_process(delta: float) -> void:
 	handle_acceleration(direction, delta)
 	apply_friction(direction, delta)
 	apply_air_resistance(direction, delta)
-	update_animations(direction)
 
 	# Track if we're on the floor BEFORE we move
 	var was_on_floor = is_on_floor()
@@ -42,6 +41,9 @@ func _physics_process(delta: float) -> void:
 	var just_left_wall = was_on_wall and not is_on_wall_only()
 	if just_left_wall:
 		wall_jump_timer.start()
+
+	# Update animations last, after all input has been processed
+	update_animations(direction)
 
 func apply_gravity(delta: float):
 	if not is_on_floor():
